@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ông Cháu Lập Trình</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"
+        integrity="sha384-xymdQtn1n3lH2wcu0qhcdaOpQwyoarkgLVxC/wZ5q7h9gHtxICrpcaSUfygqZGOe"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
+        /* Snow animation - start */
+        .snowflake {
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial;
+            text-shadow: 0 0 1px #000;
+        }
+
+        @-webkit-keyframes snowflakes-fall {
+            0% {
+                top: -10%
+            }
+
+            100% {
+                top: 100%
+            }
+        }
+
+        @-webkit-keyframes snowflakes-shake {
+            0% {
+                -webkit-transform: translateX(0px);
+                transform: translateX(0px)
+            }
+
+            50% {
+                -webkit-transform: translateX(80px);
+                transform: translateX(80px)
+            }
+
+            100% {
+                -webkit-transform: translateX(0px);
+                transform: translateX(0px)
+            }
+        }
+
+        @keyframes snowflakes-fall {
+            0% {
+                top: -10%
+            }
+
+            100% {
+                top: 100%
+            }
+        }
+
+        @keyframes snowflakes-shake {
+            0% {
+                transform: translateX(0px)
+            }
+
+            50% {
+                transform: translateX(80px)
+            }
+
+            100% {
+                transform: translateX(0px)
+            }
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default;
+            -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+            -webkit-animation-duration: 10s, 3s;
+            -webkit-animation-timing-function: linear, ease-in-out;
+            -webkit-animation-iteration-count: infinite, infinite;
+            -webkit-animation-play-state: running, running;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 10s, 3s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            animation-play-state: running, running
+        }
+
+        .snowflake:nth-of-type(0) {
+            left: 1%;
+            -webkit-animation-delay: 0s, 0s;
+            animation-delay: 0s, 0s
+        }
+
+        .snowflake:nth-of-type(1) {
+            left: 10%;
+            -webkit-animation-delay: 1s, 1s;
+            animation-delay: 1s, 1s
+        }
+
+        .snowflake:nth-of-type(2) {
+            left: 20%;
+            -webkit-animation-delay: 6s, .5s;
+            animation-delay: 6s, .5s
+        }
+
+        .snowflake:nth-of-type(3) {
+            left: 30%;
+            -webkit-animation-delay: 4s, 2s;
+            animation-delay: 4s, 2s
+        }
+
+        .snowflake:nth-of-type(4) {
+            left: 40%;
+            -webkit-animation-delay: 2s, 2s;
+            animation-delay: 2s, 2s
+        }
+
+        .snowflake:nth-of-type(5) {
+            left: 50%;
+            -webkit-animation-delay: 8s, 3s;
+            animation-delay: 8s, 3s
+        }
+
+        .snowflake:nth-of-type(6) {
+            left: 60%;
+            -webkit-animation-delay: 6s, 2s;
+            animation-delay: 6s, 2s
+        }
+
+        .snowflake:nth-of-type(7) {
+            left: 70%;
+            -webkit-animation-delay: 2.5s, 1s;
+            animation-delay: 2.5s, 1s
+        }
+
+        .snowflake:nth-of-type(8) {
+            left: 80%;
+            -webkit-animation-delay: 1s, 0s;
+            animation-delay: 1s, 0s
+        }
+
+        .snowflake:nth-of-type(9) {
+            left: 90%;
+            -webkit-animation-delay: 3s, 1.5s;
+            animation-delay: 3s, 1.5s
+        }
+        /* Snow animation - end */
+
+        body {
+            background: #181818;
+        }
+
+        .margin {
+            margin-bottom: 45px;
+        }
+
+        .bg-1 {
+            background-color: #181818;
+            color: #ffffff;
+        }
+
+        .bg-2 {
+            background-color: #28282B;
+            color: #FFFFFF;
+        }
+
+        .bg-3 {
+            background-color: #181818;
+            color: #ffffff;
+        }
+
+        .container-fluid {
+            padding-top: 70px;
+            padding-bottom: 70px;
+        }
+
+        h2,
+        h3,
+        h4,
+        p,
+        a,
+        button {
+            font-family: "Nunito", sans-serif;
+            font-weight: 700;
+        }
+
+        hr.solid {
+            border-top: 0.5px solid #bbb;
+            width: 270px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .text {
+            color: white;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            white-space: nowrap;
+        }
+
+        .rounded-social-buttons {
+            text-align: center;
+        }
+
+        .rounded-social-buttons .social-button {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border: 2px solid transparent;
+            text-decoration: none;
+            text-align: center;
+            font-size: 30px;
+            color: #fefefe;
+            font-weight: normal;
+            border-radius: 25px;
+            transition: all 0.5s ease;
+            margin-right: 2px;
+            margin-left: 2px;
+        }
+
+        .rounded-social-buttons .social-button:hover,
+        .rounded-social-buttons .social-button:focus {
+            -webkit-transform: rotate(360deg);
+            -ms-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+
+        .rounded-social-buttons .fa-twitter,
+        .fa-facebook-f,
+        .fa-linkedin,
+        .fa-youtube,
+        .fa-instagram {
+            font-size: 25px;
+        }
+
+        .rounded-social-buttons .social-button.facebook {
+            background: #3b5998;
+        }
+
+        .rounded-social-buttons .social-button.facebook:hover,
+        .rounded-social-buttons .social-button.facebook:focus {
+            color: #3b5998;
+            background: #fefefe;
+            border-color: #3b5998;
+        }
+
+        .rounded-social-buttons .social-button.twitter {
+            background: #55acee;
+        }
+
+        .rounded-social-buttons .social-button.twitter:hover,
+        .rounded-social-buttons .social-button.twitter:focus {
+            color: #55acee;
+            background: #fefefe;
+            border-color: #55acee;
+        }
+
+        .rounded-social-buttons .social-button.linkedin {
+            background: #007bb5;
+        }
+
+        .rounded-social-buttons .social-button.linkedin:hover,
+        .rounded-social-buttons .social-button.linkedin:focus {
+            color: #007bb5;
+            background: #fefefe;
+            border-color: #007bb5;
+        }
+
+        .rounded-social-buttons .social-button.youtube {
+            background: #bb0000;
+        }
+
+        .rounded-social-buttons .social-button.youtube:hover,
+        .rounded-social-buttons .social-button.youtube:focus {
+            color: #bb0000;
+            background: #fefefe;
+            border-color: #bb0000;
+        }
+
+        .rounded-social-buttons .social-button.instagram {
+            background: #125688;
+        }
+
+        .rounded-social-buttons .social-button.instagram:hover,
+        .rounded-social-buttons .social-button.instagram:focus {
+            color: #125688;
+            background: #fefefe;
+            border-color: #125688;
+        }
+
+        #btn-back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid bg-1 text-center">
+        <img src="images/profile.png" class="img-circle" alt="Bird" width="200" height="200">
+        <h3>Ông Cháu Lập Trình</h3>
+        <h4>@ong_chau_lap_trinh</h4>
+        <hr class="solid">
+        <h4>Người chia sẻ kiến thức lập trình miễn phí trên Tiktok.</h4>
+        <hr class="solid">
+        <div class="rounded-social-buttons">
+            <a class="social-button facebook" href="https://www.facebook.com/" target="_blank"><i
+                    class="fab fa-facebook-f"></i></a>
+            <a class="social-button twitter" href="https://www.twitter.com/" target="_blank"><i
+                    class="fab fa-twitter"></i></a>
+            <a class="social-button linkedin" href="https://www.linkedin.com/" target="_blank"><i
+                    class="fab fa-linkedin"></i></a>
+            <a class="social-button youtube" href="https://www.youtube.com/" target="_blank"><i
+                    class="fab fa-youtube"></i></a>
+            <a class="social-button instagram" href="https://www.instagram.com/" target="_blank"><i
+                    class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-2">
+        <div class="margin">
+            <h3 class="text-center text-danger">Chia sẻ mã nguồn miễn phí</h3>
+            <h4 class="text-center">Tất cả mã nguồn trong các video trên Tiktok sẽ được tổng hợp tại đây.</h4>
+            <br>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>#1. Điều khiến trái tim lập trình viên rung động</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7173640722145496346">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo1"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo1" class="collapse">
+                    <br>
+                    <p>Đầu tiên tải file heart.txt chứa hình trái tim</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/bfad36ab8857e5a7f46c85fea990fe35.js"></script>
+                    <p>Sau đó tải file heart.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/735822b2da7bb83c7ef4590c7cc31d4e.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#2. Khi dân IT mượn code tỏ tình</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7176949755459751195">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo2"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo2" class="collapse">
+                    <br>
+                    <p>Tải file honey.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/6382969e750f2cca133a75e54f994354.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#3. Khi dân IT thất tình</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7178433241026727195">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo3"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo3" class="collapse">
+                    <br>
+                    <p>Thất tình có code được đâu mà đòi xem code chứ :((</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>#4. Giải bài toán kinh điển tháp Hà Nội</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7176222782072687874">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo4"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo4" class="collapse">
+                    <br>
+                    <p>Tải file tower_hanoi.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/5082a30bbefc768b0c49b1cb3471c325.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#5. Tìm số nguyên tố siêu nhanh của siêu trí tuệ Việt Nam</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7175095199759109377">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo5"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo5" class="collapse">
+                    <br>
+                    <p>Tải file sieve_eratosthenes.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/cd223348c258f75c5ff5db24c470281e.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#6. Kiểm tra số hoàn hảo</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7174736019076418817">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo6"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo6" class="collapse">
+                    <br>
+                    <p>Tải file perfect_number.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/d87326019731a464fdbe64beb8fa77fa.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>#7. Tính siêu nhanh năm âm lịch</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7173991382082719003">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo7"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo7" class="collapse">
+                    <br>
+                    <p>Tải file calculate_lunar_year.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/7521377901b2fb7ffdefec196b5c596e.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#8. Giải phương trình bậc 2</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7172903289955142939">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo8"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo8" class="collapse">
+                    <br>
+                    <p>Tải file solve_quadratic_equation.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/9ab1dd447b8d309bb37196311cab1ae4.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#9. Chương trình chuyển đổi nhiệt độ</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7172497225136753921">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo9"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo9" class="collapse">
+                    <br>
+                    <p>Tải file temperature_conversion.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/97c5ac84b4983242537a2b1f3227c9d1.js"></script>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>#10. Viết trò chơi đoán số</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7172125855517297921">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo10"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo10" class="collapse">
+                    <br>
+                    <p>Tải file number_guessing.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/41cfdc3e8822a4233c4ad9067d8aafed.js"></script>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <h4>#11. Chương trình tính chỉ số BMI</h4>
+                <a class="btn btn-info" role="button"
+                    href="https://www.tiktok.com/@ong_chau_lap_trinh/video/7171778450770922779">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Xem video trên Tiktok
+                </a>
+                <button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo11"><span
+                        class="glyphicon glyphicon-console" aria-hidden="true"></span> Xem mã nguồn</button>
+                <div id="demo11" class="collapse">
+                    <br>
+                    <p>Tải file bmi.py về và chạy. Chúc bạn thành công!</p>
+                    <script src="https://gist.github.com/ongchaulaptrinh/f31890cc9c319cb89d88bfc9251dd0f4.js"></script>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h4 class="text-center text-primary">Mình vẫn đang tiếp tục cập nhật... Mọi người đón chờ nhé!</h4>
+    </div>
+    <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <!-- Snow animation - start -->
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❄
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❄
+        </div>
+        <div class="snowflake">
+            ❅
+        </div>
+        <div class="snowflake">
+            ❆
+        </div>
+        <div class="snowflake">
+            ❄
+        </div>
+    </div>
+    <!-- Snow animation - end -->
+    <div class="container-fluid bg-3 text-center">
+        <h4 class="text-center">Copyright &copy; <a href="https://www.tiktok.com/@ong_chau_lap_trinh">Ông Cháu Lập
+                Trình</a> 2022. All Rights Reserved.</h4>
+    </div>
+
+    <script>
+        let mybutton = document.getElementById("btn-back-to-top");
+
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+
+        mybutton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+</body>
+
+</html>
