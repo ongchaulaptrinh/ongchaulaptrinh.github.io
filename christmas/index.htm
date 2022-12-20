@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Ông Cháu Lập Trình</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            giftOpen();
+        });
+
+        jQuery(window).load(function () {
+            window.requestAnimFrame = (function () {
+
+                return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+            })();
+        });
+        //Gift Open
+
+        function giftOpen() {
+            const quotes = [
+                "Hôm nay ông già Noel không thể đi tặng quà cho mọi người vì đàn tuần lộc của ông đã chạy mất. Có 10 con chạy đi nhưng chỉ tìm lại được 9 con, còn 1 con đang ngồi đọc tin nhắn này… Haha! Noel vui vẻ nhé!",
+                "Nếu một sáng mai thức dậy, bạn bỗng thấy mình bị nhét vào một cái bao bố thật to và bị lôi đi thì đừng hoảng sợ nhé, bởi vì tôi đã xin ông già Noel rằng món quà tôi muốn duy nhất chính là bạn! Merry Christmas.",
+                "Giáng sinh đến cửa nhà bạn rồi. Tớ thường ít khi gửi những lời chúc Giáng sinh cho kẻ ngu đần. Nhưng hôm nay tin nhắn miễn phí nên tớ nhắn tin chúc bạn Giáng sinh vui vẻ và ế bền vững, trường tồn.",
+                "Chúc mọi người một Giáng sinh thật nhiều niềm vui, nhiều tình yêu, nhiều tiền tiêu và ngày càng ít liêu xiêu đi.",
+                "Nửa đêm Giáng sinh, nếu một ông già mập mặc đồ đỏ nhảy qua cửa sổ, gói bạn lại và cho vào bao tải thì đừng có chống cự nhé. Tôi đã nói với ông Noel rằng tôi muốn có bạn trong Giáng sinh này.",
+                "Giáng sinh và năm mới sắp đến rồi. Chúc chị em: Trẻ trung như heo sữa, Bốc lửa như heo hơi, Chịu chơi như heo nái, Hăng hái như heo con, Sắc son như heo đất, Đủ chất như ..heo thịt! Chúc anh em: Tươi vui như heo cắn, đỏ đắn như heo lai, sức dai như… heo nọc, xốc vác như heo rừng, bừng bừng như… heo quay! Merry Christmas!",
+            ]
+            jQuery("section.gift").on("click", function () {
+
+                jQuery(".gift-top").removeClass("hovered");
+                jQuery(".gift-text").hide();
+                createSnow();
+                jQuery(".gift-bottom").addClass("fadeout");
+                jQuery(".gift-top").addClass("fadeout");
+                var player = document.getElementById('player');
+                player.play()
+                jQuery(".gift-final-text").text(quotes[Math.floor((Math.random() * quotes.length))]);
+                setTimeout(function () {
+                    jQuery(".santa-wrapper").fadeIn(5000);
+                    jQuery(".gift-final-text").fadeIn(5000);
+                }, 500);
+            });
+        }
+
+        //Snow Fall
+
+        function createSnow() {
+
+            var particles = [];
+            var particleSize = 3;
+            var maxParticles = 1000;
+            var particleOpacity = .9;
+
+            // Initialize canvas
+            var canvas = document.getElementById('snow');
+            var ctx = canvas.getContext('2d');
+
+            // Get window width & height
+            var windowWidth = window.innerWidth;
+            var windowHeight = window.innerHeight;
+
+            // Apply canvas size based on window width & height.
+            // This can be changed to bound within an element instead.
+            canvas.width = windowWidth;
+            canvas.height = windowHeight;
+
+            // Push particle iteration
+            for (var i = 0; i < maxParticles; i++) {
+
+                particles.push({
+
+                    // Particle x position
+                    x: Math.random() * windowWidth,
+
+                    // Particle y position
+                    y: Math.random() * windowHeight,
+
+                    // Particle radius
+                    r: Math.random(Math.min(particleSize)) * particleSize,
+
+                    // Particle density 
+                    d: Math.random() * maxParticles,
+                });
+            }
+
+            // Render particles
+            function render() {
+
+                ctx.clearRect(0, 0, windowWidth, windowHeight);
+                ctx.fillStyle = 'rgba(255, 255, 255, ' + particleOpacity + ')';
+                ctx.beginPath();
+
+                for (var i = 0; i < maxParticles; i++) {
+
+                    // Iterate the particles.
+                    var p = particles[i];
+
+                    // Move particles along x, y.
+                    ctx.moveTo(p.x, p.y);
+
+                    // Draw particle.
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+                }
+
+                ctx.fill();
+                update();
+            }
+
+            // To create a more dynamic and organic flow, we need to apply an
+            // incremental 'angle' that will iterate through each particle flow.
+            var angle = 0.005;
+
+            // Update particles
+            function update() {
+
+                // Incremental angle.
+                angle += 0.005;
+
+                for (var i = 0; i < maxParticles; i++) {
+
+                    var p = particles[i];
+
+                    // Offset the particles flow based on the angle.
+                    p.y += Math.cos(p.d) + p.r;
+                    p.x += Math.sin(angle) * Math.PI / 10;
+
+                    // Re-iterate the particles to the top once the particle has
+                    // reached the bottom of the window.
+                    if (p.y > windowHeight) {
+
+                        particles[i] = {
+
+                            x: Math.random() * windowWidth,
+                            y: 0,
+                            r: p.r,
+                            d: p.d
+                        };
+                    }
+                }
+            }
+            // Call function.
+            (function runtime() {
+                requestAnimFrame(runtime);
+                render();
+            })();
+        }
+
+    </script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700&display=swap');
+
+        body {
+            background-color: #EDE9DE;
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 0;
+            -webkit-backface-visibility: hidden;
+            /* Chrome, Safari, Opera */
+            backface-visibility: hidden;
+        }
+
+        .gift {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            transform: translate3d(-50%, -50%, 0);
+            cursor: pointer;
+        }
+
+        .gift-top {
+            position: relative;
+            width: 100%;
+            height: 25%;
+            background: #F54537;
+            border-radius: 5px 5px 0 0;
+            background-image: linear-gradient(to right, #F54537 0%, #F54537 44%, #FFC113 44%, #FFC113 56%, #F54537 56%, #F54537 100%);
+        }
+
+        .gift-top.hovered {
+            animation: shake 3s infinite;
+            -webkit-animation: shake 3s infinite;
+            -moz-animation: shake 3s infinite;
+            -ms-animation: shake 3s infinite;
+            -o-animation: shake 3s infinite;
+        }
+
+        .gift-bottom.fadeout {
+            -webkit-animation-name: fadeOutDown;
+            animation-name: fadeOutDown;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .gift-top.fadeout {
+            -webkit-animation-name: rotateOutUpRight;
+            animation-name: rotateOutUpRight;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+
+        .gift-top::before,
+        .gift-top::after {
+            content: "";
+            width: 15px;
+            height: 15px;
+            border: 10px solid #FFC113;
+            border-radius: 50% 50% 0 50%;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate3d(-100%, -100%, 0) skew(10deg, 10deg);
+        }
+
+        .gift-top::after {
+            border-radius: 50% 50% 50% 0;
+            transform: translate3d(0, -100%, 0) skew(-10deg, -10deg);
+        }
+
+        .gift-text {
+            color: #333333;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .gift-final-text {
+            font-size: 20px;
+            display: none;
+            text-align: justify;
+        }
+
+        .gift-bottom {
+            width: 95%;
+            height: 75%;
+            margin: 0 auto;
+            background-image: linear-gradient(to right, #F54537 0%, #F54537 45%, #FFC113 45%, #FFC113 55%, #F54537 55%, #F54537 100%);
+            border-radius: 0 0 5px 5px;
+        }
+
+        .gift-card-text {
+            display: none;
+            font-size: 33px;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+            position: absolute;
+            width: 100%;
+        }
+
+        #snow {
+            width: 100%;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            12% {
+                transform: rotate(-10deg);
+            }
+
+            25% {
+                transform: rotate(10deg);
+            }
+
+            37% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        @-webkit-keyframes shake {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            12% {
+                -webkit-transform: rotate(-10deg);
+            }
+
+            25% {
+                -webkit-transform: rotate(10deg);
+            }
+
+            37% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(0deg);
+            }
+        }
+
+        @-moz-keyframes shake {
+            0% {
+                -moz-transform: rotate(0deg);
+            }
+
+            12% {
+                -moz-transform: rotate(-10deg);
+            }
+
+            25% {
+                -moz-transform: rotate(10deg);
+            }
+
+            37% {
+                -moz-transform: rotate(0deg);
+            }
+
+            100% {
+                -moz-transform: rotate(0deg);
+            }
+        }
+
+        @-ms-keyframes shake {
+            0% {
+                -ms-transform: rotate(0deg);
+            }
+
+            12% {
+                -ms-transform: rotate(0deg);
+            }
+
+            25% {
+                -ms-transform: rotate(10deg);
+            }
+
+            37% {
+                -ms-transform: rotate(0deg);
+            }
+
+            100% {
+                -ms-transform: rotate(0deg);
+            }
+        }
+
+        @-o-keyframes shake {
+            0% {
+                -o-transform: rotate(0deg);
+            }
+
+            12% {
+                -o-transform: rotate(0deg);
+            }
+
+            25% {
+                -o-transform: rotate(10deg);
+            }
+
+            37% {
+                -o-transform: rotate(0deg);
+            }
+
+            100% {
+                -o-transform: rotate(0deg);
+            }
+        }
+
+        @-webkit-keyframes fadeOutDown {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0);
+            }
+        }
+
+        @keyframes fadeOutDown {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: translate3d(0, 100%, 0);
+                transform: translate3d(0, 100%, 0);
+            }
+        }
+
+        @-webkit-keyframes rotateOutUpRight {
+            0% {
+                -webkit-transform-origin: right bottom;
+                transform-origin: right bottom;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform-origin: right bottom;
+                transform-origin: right bottom;
+                -webkit-transform: rotate3d(0, 0, 1, 90deg);
+                transform: rotate3d(0, 0, 1, 90deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rotateOutUpRight {
+            0% {
+                -webkit-transform-origin: right bottom;
+                transform-origin: right bottom;
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform-origin: right bottom;
+                transform-origin: right bottom;
+                -webkit-transform: rotate3d(0, 0, 1, 90deg);
+                transform: rotate3d(0, 0, 1, 90deg);
+                opacity: 0;
+            }
+        }
+
+
+        /*Santa CSS*/
+
+        .santa-wrapper {
+            width: 280px;
+            height: 280px;
+            background: #a0d5d3;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            margin-top: -60px;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            border: 10px solid #f8e7dc;
+            overflow: hidden;
+            display: none;
+        }
+
+        .santa {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        .santa .body {
+            width: 190px;
+            height: 210px;
+            background: #de2f32;
+            position: relative;
+            border-radius: 50%;
+            top: 0;
+            -webkit-animation: bodyLaugh 4s linear infinite;
+            -moz-animation: bodyLaugh 4s linear infinite;
+            -ms-animation: bodyLaugh 4s linear infinite;
+            -o-animation: bodyLaugh 4s linear infinite;
+            animation: bodyLaugh 4s linear infinite;
+            -webkit-transform: translateY(50%);
+            -moz-transform: translateY(50%);
+            -ms-transform: translateY(50%);
+            -o-transform: translateY(50%);
+            transform: translateY(50%);
+        }
+
+        .santa .body:before {
+            content: " ";
+            width: 7px;
+            height: 7px;
+            background: #f7be10;
+            border-radius: 50%;
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            -moz-transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            -o-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            box-shadow: 0px -18px 0px #f7be10, 0px 18px 0px #f7be10;
+        }
+
+        .santa .head {
+            z-index: 2;
+            position: absolute;
+            bottom: 90px;
+            left: 50%;
+            -webkit-animation: headLaugh 4s linear infinite;
+            -moz-animation: headLaugh 4s linear infinite;
+            -ms-animation: headLaugh 4s linear infinite;
+            -o-animation: headLaugh 4s linear infinite;
+            animation: headLaugh 4s linear infinite;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        .santa .head .face {
+            width: 120px;
+            height: 130px;
+            background: #edcab0;
+            background: radial-gradient(#edcab0, #e9a982);
+            border-radius: 50%;
+            border: 3px solid #f8e7dc;
+        }
+
+        .santa .head .face .redhat .whitepart {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+            width: 90%;
+            height: 32px;
+            background: #f8e7dc;
+            border-radius: 50px;
+            z-index: 4;
+            box-shadow: 0px 6px 0px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .santa .head .face .redhat .redpart {
+            width: 120px;
+            height: 120px;
+            background: #de2f32;
+            position: absolute;
+            top: -50px;
+            left: 15px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .santa .head .face .redhat .redpart:before {
+            content: " ";
+            width: 95px;
+            height: 95px;
+            position: absolute;
+            left: 0;
+            top: 12px;
+            border-radius: 50%;
+            box-shadow: inset -8px -1px 0px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .santa .head .face .redhat .redpart:after {
+            content: " ";
+            position: absolute;
+            right: 0;
+            top: 60px;
+            background: #de2f32;
+            width: 20px;
+            height: 50px;
+        }
+
+        .santa .head .face .redhat .hatball {
+            width: 38px;
+            height: 38px;
+            background: #f8e7dc;
+            border-radius: 50%;
+            z-index: 5;
+            position: absolute;
+            right: -20px;
+            top: 40px;
+            box-shadow: 0px 6px 0px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        .santa .head .face .eyes {
+            position: absolute;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+            top: 57px;
+        }
+
+        .santa .head .face .eyes:before,
+        .santa .head .face .eyes:after {
+            content: " ";
+            position: absolute;
+            width: 15px;
+            height: 9px;
+            top: 0;
+            border: 5px solid #a8744f;
+            border-width: 0;
+            border-top-width: 5px;
+            border-radius: 50%;
+        }
+
+        .santa .head .face .eyes:before {
+            left: -28px;
+        }
+
+        .santa .head .face .eyes:after {
+            right: -28px;
+        }
+
+        .santa .head .face .beard {
+            width: 55px;
+            height: 55px;
+            background: #f8e7dc;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            -webkit-animation: beardLaugh 4s linear infinite;
+            -moz-animation: beardLaugh 4s linear infinite;
+            -ms-animation: beardLaugh 4s linear infinite;
+            -o-animation: beardLaugh 4s linear infinite;
+            animation: beardLaugh 4s linear infinite;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        .santa .head .face .beard:before,
+        .santa .head .face .beard:after {
+            content: " ";
+            width: 80px;
+            height: 80px;
+            background: #f8e7dc;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .santa .head .face .beard:before {
+            left: -40px;
+        }
+
+        .santa .head .face .beard:after {
+            right: -40px;
+        }
+
+        .santa .head .face .beard .nouse {
+            width: 25px;
+            height: 20px;
+            border-radius: 50%;
+            background: #edcab0;
+            position: absolute;
+            z-index: 3;
+            box-shadow: inset -3px -3px 0px #e9a982;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+            top: -42px;
+        }
+
+        .santa .head .face .beard .mouth {
+            background: #a8744f;
+            z-index: 3;
+            position: absolute;
+            width: 15px;
+            height: 5px;
+            border-bottom-right-radius: 80px 50px;
+            border-bottom-left-radius: 80px 50px;
+            left: 50%;
+            top: 0;
+            -webkit-animation: mouthLaugh 4s linear infinite;
+            -moz-animation: mouthLaugh 4s linear infinite;
+            -ms-animation: mouthLaugh 4s linear infinite;
+            -o-animation: mouthLaugh 4s linear infinite;
+            animation: mouthLaugh 4s linear infinite;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        .santa .head .ears:before,
+        .santa .head .ears:after {
+            content: " ";
+            width: 20px;
+            height: 30px;
+            border-radius: 50%;
+            background: radial-gradient(#e9a982, #edcab0);
+            position: absolute;
+            top: 50%;
+            z-index: -1;
+        }
+
+        .santa .head .ears:before {
+            left: -8px;
+            -webkit-transform: rotate(-10deg);
+            -moz-transform: rotate(-10deg);
+            -ms-transform: rotate(-10deg);
+            -o-transform: rotate(-10deg);
+            transform: rotate(-10deg);
+        }
+
+        .santa .head .ears:after {
+            right: -8px;
+            -webkit-transform: rotate(10deg);
+            -moz-transform: rotate(10deg);
+            -ms-transform: rotate(10deg);
+            -o-transform: rotate(10deg);
+            transform: rotate(10deg);
+        }
+
+        @-webkit-keyframes bodyLaugh {
+            0% {
+                top: 0px;
+            }
+
+            2% {
+                top: -3px;
+            }
+
+            4% {
+                top: 0px;
+            }
+
+            8% {
+                top: -3px;
+            }
+
+            10% {
+                top: 0px;
+            }
+
+            12% {
+                top: -3px;
+            }
+
+            14% {
+                top: 0px;
+            }
+
+            18% {
+                top: -3px;
+            }
+
+            20% {
+                top: 0px;
+            }
+
+            22% {
+                top: -3px;
+            }
+
+            24% {
+                top: 0px;
+            }
+
+            28% {
+                top: -3px;
+            }
+
+            30% {
+                top: 0px;
+            }
+
+            100% {
+                top: 0px;
+            }
+        }
+
+        @-moz-keyframes bodyLaugh {
+            0% {
+                top: 0px;
+            }
+
+            2% {
+                top: -3px;
+            }
+
+            4% {
+                top: 0px;
+            }
+
+            8% {
+                top: -3px;
+            }
+
+            10% {
+                top: 0px;
+            }
+
+            12% {
+                top: -3px;
+            }
+
+            14% {
+                top: 0px;
+            }
+
+            18% {
+                top: -3px;
+            }
+
+            20% {
+                top: 0px;
+            }
+
+            22% {
+                top: -3px;
+            }
+
+            24% {
+                top: 0px;
+            }
+
+            28% {
+                top: -3px;
+            }
+
+            30% {
+                top: 0px;
+            }
+
+            100% {
+                top: 0px;
+            }
+        }
+
+        @-ms-keyframes bodyLaugh {
+            0% {
+                top: 0px;
+            }
+
+            2% {
+                top: -3px;
+            }
+
+            4% {
+                top: 0px;
+            }
+
+            8% {
+                top: -3px;
+            }
+
+            10% {
+                top: 0px;
+            }
+
+            12% {
+                top: -3px;
+            }
+
+            14% {
+                top: 0px;
+            }
+
+            18% {
+                top: -3px;
+            }
+
+            20% {
+                top: 0px;
+            }
+
+            22% {
+                top: -3px;
+            }
+
+            24% {
+                top: 0px;
+            }
+
+            28% {
+                top: -3px;
+            }
+
+            30% {
+                top: 0px;
+            }
+
+            100% {
+                top: 0px;
+            }
+        }
+
+        @keyframes bodyLaugh {
+            0% {
+                top: 0px;
+            }
+
+            2% {
+                top: -3px;
+            }
+
+            4% {
+                top: 0px;
+            }
+
+            8% {
+                top: -3px;
+            }
+
+            10% {
+                top: 0px;
+            }
+
+            12% {
+                top: -3px;
+            }
+
+            14% {
+                top: 0px;
+            }
+
+            18% {
+                top: -3px;
+            }
+
+            20% {
+                top: 0px;
+            }
+
+            22% {
+                top: -3px;
+            }
+
+            24% {
+                top: 0px;
+            }
+
+            28% {
+                top: -3px;
+            }
+
+            30% {
+                top: 0px;
+            }
+
+            100% {
+                top: 0px;
+            }
+        }
+
+        @-webkit-keyframes beardLaugh {
+            0% {
+                bottom: -28px;
+            }
+
+            2% {
+                bottom: -30px;
+            }
+
+            4% {
+                bottom: -28px;
+            }
+
+            8% {
+                bottom: -30px;
+            }
+
+            10% {
+                bottom: -28px;
+            }
+
+            12% {
+                bottom: -30px;
+            }
+
+            14% {
+                bottom: -28px;
+            }
+
+            18% {
+                bottom: -30px;
+            }
+
+            20% {
+                bottom: -28px;
+            }
+
+            22% {
+                bottom: -30px;
+            }
+
+            24% {
+                bottom: -28px;
+            }
+
+            28% {
+                bottom: -30px;
+            }
+
+            30% {
+                bottom: -28px;
+            }
+
+            100% {
+                bottom: -28px;
+            }
+        }
+
+        @-moz-keyframes beardLaugh {
+            0% {
+                bottom: -28px;
+            }
+
+            2% {
+                bottom: -30px;
+            }
+
+            4% {
+                bottom: -28px;
+            }
+
+            8% {
+                bottom: -30px;
+            }
+
+            10% {
+                bottom: -28px;
+            }
+
+            12% {
+                bottom: -30px;
+            }
+
+            14% {
+                bottom: -28px;
+            }
+
+            18% {
+                bottom: -30px;
+            }
+
+            20% {
+                bottom: -28px;
+            }
+
+            22% {
+                bottom: -30px;
+            }
+
+            24% {
+                bottom: -28px;
+            }
+
+            28% {
+                bottom: -30px;
+            }
+
+            30% {
+                bottom: -28px;
+            }
+
+            100% {
+                bottom: -28px;
+            }
+        }
+
+        @-ms-keyframes beardLaugh {
+            0% {
+                bottom: -28px;
+            }
+
+            2% {
+                bottom: -30px;
+            }
+
+            4% {
+                bottom: -28px;
+            }
+
+            8% {
+                bottom: -30px;
+            }
+
+            10% {
+                bottom: -28px;
+            }
+
+            12% {
+                bottom: -30px;
+            }
+
+            14% {
+                bottom: -28px;
+            }
+
+            18% {
+                bottom: -30px;
+            }
+
+            20% {
+                bottom: -28px;
+            }
+
+            22% {
+                bottom: -30px;
+            }
+
+            24% {
+                bottom: -28px;
+            }
+
+            28% {
+                bottom: -30px;
+            }
+
+            30% {
+                bottom: -28px;
+            }
+
+            100% {
+                bottom: -28px;
+            }
+        }
+
+        @keyframes beardLaugh {
+            0% {
+                bottom: -28px;
+            }
+
+            2% {
+                bottom: -30px;
+            }
+
+            4% {
+                bottom: -28px;
+            }
+
+            8% {
+                bottom: -30px;
+            }
+
+            10% {
+                bottom: -28px;
+            }
+
+            12% {
+                bottom: -30px;
+            }
+
+            14% {
+                bottom: -28px;
+            }
+
+            18% {
+                bottom: -30px;
+            }
+
+            20% {
+                bottom: -28px;
+            }
+
+            22% {
+                bottom: -30px;
+            }
+
+            24% {
+                bottom: -28px;
+            }
+
+            28% {
+                bottom: -30px;
+            }
+
+            30% {
+                bottom: -28px;
+            }
+
+            100% {
+                bottom: -28px;
+            }
+        }
+
+        @-webkit-keyframes headLaugh {
+            0% {
+                bottom: 83px;
+            }
+
+            45% {
+                bottom: 83px;
+            }
+
+            50% {
+                bottom: 90px;
+            }
+
+            92% {
+                bottom: 90px;
+            }
+
+            98% {
+                bottom: 83px;
+            }
+
+            100% {
+                bottom: 83px;
+            }
+        }
+
+        @-moz-keyframes headLaugh {
+            0% {
+                bottom: 83px;
+            }
+
+            45% {
+                bottom: 83px;
+            }
+
+            50% {
+                bottom: 90px;
+            }
+
+            92% {
+                bottom: 90px;
+            }
+
+            98% {
+                bottom: 83px;
+            }
+
+            100% {
+                bottom: 83px;
+            }
+        }
+
+        @-ms-keyframes headLaugh {
+            0% {
+                bottom: 83px;
+            }
+
+            45% {
+                bottom: 83px;
+            }
+
+            50% {
+                bottom: 90px;
+            }
+
+            92% {
+                bottom: 90px;
+            }
+
+            98% {
+                bottom: 83px;
+            }
+
+            100% {
+                bottom: 83px;
+            }
+        }
+
+        @keyframes headLaugh {
+            0% {
+                bottom: 83px;
+            }
+
+            45% {
+                bottom: 83px;
+            }
+
+            50% {
+                bottom: 90px;
+            }
+
+            92% {
+                bottom: 90px;
+            }
+
+            98% {
+                bottom: 83px;
+            }
+
+            100% {
+                bottom: 83px;
+            }
+        }
+
+        @-webkit-keyframes mouthLaugh {
+            0% {
+                width: 20px;
+            }
+
+            45% {
+                width: 20px;
+            }
+
+            50% {
+                width: 15px;
+            }
+
+            92% {
+                width: 15px;
+            }
+
+            98% {
+                width: 20px;
+            }
+
+            100% {
+                width: 20px;
+            }
+        }
+
+        @-moz-keyframes mouthLaugh {
+            0% {
+                width: 20px;
+            }
+
+            45% {
+                width: 20px;
+            }
+
+            50% {
+                width: 15px;
+            }
+
+            92% {
+                width: 15px;
+            }
+
+            98% {
+                width: 20px;
+            }
+
+            100% {
+                width: 20px;
+            }
+        }
+
+        @-ms-keyframes mouthLaugh {
+            0% {
+                width: 20px;
+            }
+
+            45% {
+                width: 20px;
+            }
+
+            50% {
+                width: 15px;
+            }
+
+            92% {
+                width: 15px;
+            }
+
+            98% {
+                width: 20px;
+            }
+
+            100% {
+                width: 20px;
+            }
+        }
+
+        @keyframes mouthLaugh {
+            0% {
+                width: 20px;
+            }
+
+            45% {
+                width: 20px;
+            }
+
+            50% {
+                width: 15px;
+            }
+
+            92% {
+                width: 15px;
+            }
+
+            98% {
+                width: 20px;
+            }
+
+            100% {
+                width: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="gift">
+        <div class="gift-top hovered"></div>
+        <div class="gift-bottom"></div>
+        <div class="santa-wrapper">
+            <div class="santa">
+                <div class="head">
+                    <div class="face">
+                        <div class="redhat">
+                            <div class="whitepart"></div>
+                            <div class="redpart"></div>
+                            <div class="hatball"></div>
+                        </div>
+                        <div class="eyes"></div>
+                        <div class="beard">
+                            <div class="nouse"></div>
+                            <div class="mouth"></div>
+                        </div>
+                    </div>
+                    <div class="ears"></div>
+                </div>
+                <div class="body"></div>
+            </div>
+        </div>
+        <h1 class="gift-text">Ông già Noel vừa mang đến cho bạn một món quà đặc biệt. Mở ngay thôi nào!</h1>
+        <h1 class="gift-final-text">Một mùa Giáng Sinh FA nữa lại đến, chúc Ông Cháu Lập Trình đêm Giáng Sinh thả thính
+            đến đâu cá đớp đến đó, nhanh chóng thoát kiếp FA. Chúc mọi người có một mùa Giáng Sinh an lành và ấm áp!
+        </h1>
+        <audio id="player" autoplay loop>
+            <source src="./sounds/merry_christmas.mp3" type="audio/mpeg">
+        </audio>
+    </section>
+    <section>
+        <canvas id="snow"></canvas>
+    </section>
+</body>
+
+</html>
