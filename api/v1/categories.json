@@ -1,0 +1,138 @@
+[
+    {
+        "en_name":"Food",
+        "vi_name":"Ăn uống",
+        "code":"food",
+        "icon":"/icons/food.svg",
+        "color":"#FFC94A",
+        "type":0
+    },
+    {
+        "en_name":"Houseware",
+        "vi_name":"Chi tiêu hàng ngày",
+        "code":"houseware",
+        "icon":"/icons/houseware.svg",
+        "color":"#C08B5C",
+        "type":0
+    },
+    {
+        "en_name":"Clothes",
+        "vi_name":"Quần áo",
+        "code":"clothes",
+        "icon":"/icons/clothes.svg",
+        "color":"#795458",
+        "type":0
+    },
+    {
+        "en_name":"Cosmetic",
+        "vi_name":"Mỹ phẩm",
+        "code":"cosmetic",
+        "icon":"/icons/cosmetic.svg",
+        "color":"#453F78",
+        "type":0
+    },
+    {
+        "en_name":"Exchange",
+        "vi_name":"Phí giao lưu",
+        "code":"exchange",
+        "icon":"/icons/exchange.svg",
+        "color":"#557C55",
+        "type":0
+    },
+    {
+        "en_name":"Medical",
+        "vi_name":"Y tế",
+        "code":"medical",
+        "icon":"/icons/medical.svg",
+        "color":"#1D5B79",
+        "type":0
+    },
+    {
+        "en_name":"Education",
+        "vi_name":"Giáo dục",
+        "code":"education",
+        "icon":"/icons/education.svg",
+        "color":"#FCE22A",
+        "type":0
+    },
+    {
+        "en_name":"Electric bill",
+        "vi_name":"Tiền điện",
+        "code":"electric_bill",
+        "icon":"/icons/electric_bill.svg",
+        "color":"#5463FF",
+        "type":0
+    },
+    {
+        "en_name":"Transportation",
+        "vi_name":"Đi lại",
+        "code":"transportation",
+        "icon":"/icons/transportation.svg",
+        "color":"#D24545",
+        "type":0
+    },
+    {
+        "en_name":"Contact fee",
+        "vi_name":"Phí liên lạc",
+        "code":"contact_fee",
+        "icon":"/icons/contact_fee.svg",
+        "color":"#804674",
+        "type":0
+    },
+    {
+        "en_name":"Housing expenses",
+        "vi_name":"Tiền nhà",
+        "code":"housing_expenses",
+        "icon":"/icons/housing_expenses.svg",
+        "color":"#357C3C",
+        "type":0
+    },
+    {
+        "en_name":"Salary",
+        "vi_name":"Tiền lương",
+        "code":"salary",
+        "icon":"/icons/salary.svg",
+        "color":"#15F5BA",
+        "type":1
+    },
+    {
+        "en_name":"Pocket money",
+        "vi_name":"Tiền phụ cấp",
+        "code":"pocket_money",
+        "icon":"/icons/pocket_money.svg",
+        "color":"#FA7070",
+        "type":1
+    },
+    {
+        "en_name":"Bonus",
+        "vi_name":"Tiền thưởng",
+        "code":"bonus",
+        "icon":"/icons/bonus.svg",
+        "color":"#FFD23F",
+        "type":1
+    },
+    {
+        "en_name":"Side job",
+        "vi_name":"Thu nhập phụ",
+        "code":"side_job",
+        "icon":"/icons/side_job.svg",
+        "color":"#337357",
+        "type":1
+    },
+    {
+        "en_name":"Investment",
+        "vi_name":"Đầu tư",
+        "code":"investment",
+        "icon":"/icons/investment.svg",
+        "color":"#FD8D14",
+        "type":1
+    },
+    {
+        "en_name":"Extra",
+        "vi_name":"Thu nhập tạm thời",
+        "code":"extra",
+        "icon":"/icons/extra.svg",
+        "color":"#FF4B91",
+        "type":1
+    }
+]
